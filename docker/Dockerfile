@@ -1,6 +1,9 @@
 FROM ubuntu:latest
 LABEL author="Kieran White" email="whiteks@aston.ac.uk"
 
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/London
+
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 	python3-pip \
@@ -12,6 +15,8 @@ RUN apt-get update \
 	libxml2-dev \
 	unixodbc-dev \
 	libgl1-mesa-glx \
+	python3-tk \
+	ghostscript \
 	&& apt-get clean
 
 # install python requirements
@@ -24,5 +29,6 @@ WORKDIR /app
 COPY document_parser /app
 
 EXPOSE 5000
+
 ENTRYPOINT ["/usr/bin/python3"]
 CMD ["app.py"]

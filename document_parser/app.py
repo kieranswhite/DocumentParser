@@ -4,6 +4,7 @@ from jsonschema import validate,Draft7Validator
 from jsonschema.exceptions import ValidationError
 from logging.config import dictConfig
 import json
+import os
 
 from parsers import base_parser
 from process_document import process_document
@@ -145,4 +146,7 @@ def parsing_exception_handler(error):
 
 
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0")
+    if "FLASK_DEBUG" in os.environ:
+        app.run(debug=True, host="0.0.0.0")
+    else:
+         app.run(debug=False, host="0.0.0.0")

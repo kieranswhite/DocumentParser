@@ -80,7 +80,7 @@ class PDFParser(BaseParser):
                     section_df = camelot_tables[0].df
                     
                     if section['header'] == 'Y':
-                        section_df = section_df.drop(section_df.index[0])
+                        section_df = section_df.iloc[1:]
 
                     if len(table_config['fields']) != len(section_df.columns):
                         raise ParsingException('Table Config specified: ' + str(len(table_config['fields'])) + ' fields, but table:' + str(table_config['id']) + ' has: ' + str(len(section_df.columns)) + ' fields')
