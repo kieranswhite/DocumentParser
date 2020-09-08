@@ -1,0 +1,8 @@
+argparse~=1.4.0
+pandas~=1.0.5
+camelot-py[cv]~=0.8.1
+boto3~=1.9.235
+Flask~=1.1.2
+jsonschema~=3.2.0
+PyQt5~=5.14.0
+PyMuPDF~=1.17.3

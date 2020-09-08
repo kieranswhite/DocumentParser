@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  dp:
+    image: document_parser:latest
+    ports:
+    - 5000:5000
+    volumes:
+    - ./output:/app/output_files
+    - ./input:/app/input_files:ro
+    restart: always
+    environment:
+      region_name: eu-west-2
+      #AWS_ACCESS_KEY_ID: 
+      #AWS_SECRET_ACCESS_KEY: 
+
+
+
+

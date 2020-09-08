@@ -1,0 +1,168 @@
+{
+    "$id": "https://example.com/card.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "A JSONschema for the document parsing tool",
+    "type": "object",
+    "required": [
+        "type",
+        "schema_name"
+    ],
+    "anyOf": [
+        {"required" : ["tables"]},
+        {"required" : ["text"]},
+        {"required" : ["fields"]}
+      ],
+    "properties": {
+        "type": {
+            "description": "Schema Type. i.e pdf, word ,excel",
+            "type": "string",
+            "enum": [
+                "pdf"
+            ]
+        },
+        "schema_name": {},
+        "tables": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "type",
+                    "sections",
+                    "fields"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "lattice",
+                            "stream"
+                        ]
+                    },
+                    "fields": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "sections": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "pages",
+                                "table_region"
+                            ],
+                            "properties": {
+                                "pages": {
+                                    "type": "string",
+                                    "description": "page definition. i.e: 1-(end-2)"
+                                },
+                                "header": {
+                                    "type": "string",
+                                    "description": "whether a header is present in the section (Y or N)",
+                                    "enum": [
+                "Y","N"
+            ]
+                                },
+                                "strip_text": {
+                                    "type": "string",
+                                    "description": "Regex for stripping table text in Camelot"
+                                },
+                                "table_region": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "text": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "type",
+                    "sections"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "sections": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "pages",
+                                "text_region"
+                            ],
+                            "properties": {
+                                "pages": {
+                                    "type": "string",
+                                    "description": "page definition. i.e: 1-(end-2)"
+                                },
+                                "text_region": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "fields": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "type",
+                    "sections"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "sections": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "pages",
+                                "regex",
+                                "matches"
+                            ],
+                            "properties": {
+                                "pages": {
+                                    "type": "string",
+                                    "description": "page definition. i.e: 1-(end-2)"
+                                },
+                                "regex": {
+                                    "type": "string"
+                                },
+                                "matches": {
+                                    "type": "string",
+                                    "description": "Whether to return all matches or just the first match",
+                                    "enum": ["all",
+                                    "1"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
